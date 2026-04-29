@@ -4,7 +4,8 @@ import { getLoggedUser,getAllUsers} from "../apicalls/users"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import toast from "react-hot-toast"
-import { setUser,setAllUsers } from "../redux/userSlice"
+import { setUser,setAllUsers, setAllChats } from "../redux/userSlice"
+import { getAllChats } from "../apicalls/chat"
 
 function ProtectedRoute({children}){
    const {user} =useSelector(state=>state.userReducer||{})
@@ -45,11 +46,30 @@ function ProtectedRoute({children}){
             navigate('/login')
         }
     }
+
+    const getCurrentUserChat=async()=>{
+        let response=null
+        try {
+            response=await getAllChats()
+           
+            if(response.success){
+                dispatch(setAllChats(response.data))
+            }
+            else
+            {
+                toast.error(response.message)
+                navigate('/login')
+            }
+        } catch (error) {
+            navigate('/login')
+        }
+    }
     useEffect(()=>{
         if(localStorage.getItem('token')){
             //write logic to current user details
             getLoggedInUser()
             getAllUsersFromDb()
+            getCurrentUserChat()
         }
         else{
            navigate('/login')

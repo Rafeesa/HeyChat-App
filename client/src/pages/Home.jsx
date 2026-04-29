@@ -1,15 +1,16 @@
 import React from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/sidebar'
+import ChatArea from '../components/ChatArea'
 
 const Home = () => {
   return (
     <div className="home-page">
         <Header />
-        <Sidebar />
+       
     <div className="main-content">
-         {/*<!--SIDEBAR LAYOUT-->*/}
-         {/*<!--CHAT AREA LAYOUT-->*/}
+          <Sidebar />
+         <ChatArea />
     </div>
 </div>
   )
