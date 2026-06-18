@@ -76,7 +76,7 @@ const UsersList = ({ searchkey }) => {
                 />
               )}
               {!user.profilePic && (
-                <div class="user-default-profile-pic">
+                <div className="user-default-profile-pic">
                   {user.firstName.charAt(0).toUpperCase() +
                     user.lastName.charAt(0).toUpperCase()}
                 </div>
